@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Watch selected X accounts via the official filtered stream and email new posts.",
+  "description": "Watch selected X accounts in near real time and email new posts to you.",
   "engines": {
     "node": ">=20"
   },

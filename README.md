@@ -1,14 +1,33 @@
 # X Watch
 
-Monitor selected X accounts through the official X API v2 filtered stream and email new posts.
+Watch selected X accounts in near real time and email new posts to you.
 
-The service is designed for low-latency X account watching across any topic or workflow:
+X Watch uses the official X API v2 filtered stream to listen for posts from accounts you care about. When a watched account publishes a new matching post, the service deduplicates it and sends the post text, author, timestamp, matched rule, and X link to your configured email inbox.
 
-- uses a long-lived filtered stream connection instead of polling
-- syncs `from:username` stream rules from `config.json`
-- stores notified post IDs in `data/state.json` to avoid duplicate emails
-- optionally runs a recent-search catch-up after startup or reconnect
-- sends email through Resend, SMTP, or a console preview provider
+## What It Does
+
+- Watches your configured X users through a long-lived stream connection
+- Emails you when a watched user posts something new
+- Supports filters for replies, reposts, quote posts, required keywords, and excluded keywords
+- Stores notified post IDs in `data/state.json` so the same post is not emailed repeatedly
+- Can run a recent-search catch-up after startup or reconnect to reduce missed posts
+- Supports Resend, SMTP, or console preview delivery
+
+Example uses:
+
+- Track market or finance accounts and receive new posts by email
+- Watch product, company, creator, policy, research, or incident-update accounts
+- Build a private notification feed without keeping X open all day
+
+## How It Works
+
+```text
+configured X users
+  -> X filtered stream rules
+  -> new matching post
+  -> local duplicate check
+  -> email notification
+```
 
 ## Setup
 
