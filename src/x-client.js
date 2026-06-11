@@ -135,16 +135,21 @@ export class XClient {
 
   async fetchRaw(endpoint, options = {}) {
     const url = endpoint.startsWith("http") ? endpoint : `${this.apiBase}${endpoint}`;
-    const response = await fetch(url, {
-      method: options.method || "GET",
-      signal: options.signal,
-      headers: {
-        Authorization: `Bearer ${this.bearerToken}`,
-        "Content-Type": "application/json",
-        "User-Agent": "x-finance-watch/0.1",
-      },
-      body: options.body ? JSON.stringify(options.body) : undefined,
-    });
+    let response;
+    try {
+      response = await fetch(url, {
+        method: options.method || "GET",
+        signal: options.signal,
+        headers: {
+          Authorization: `Bearer ${this.bearerToken}`,
+          "Content-Type": "application/json",
+          "User-Agent": "x-finance-watch/0.1",
+        },
+        body: options.body ? JSON.stringify(options.body) : undefined,
+      });
+    } catch (error) {
+      throw enrichFetchError(error, url);
+    }
 
     if (!response.ok) {
       const body = await response.text();
@@ -156,6 +161,22 @@ export class XClient {
 
     return response;
   }
+}
+
+function enrichFetchError(error, url) {
+  const cause = error.cause;
+  const details = [
+    cause?.code,
+    cause?.message,
+  ].filter(Boolean).join(": ");
+
+  const message = details
+    ? `Network request to ${url} failed (${details})`
+    : `Network request to ${url} failed (${error.message})`;
+
+  const enriched = new Error(message);
+  enriched.cause = error;
+  return enriched;
 }
 
 function retryAfterMs(headers) {

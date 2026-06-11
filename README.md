@@ -70,6 +70,14 @@ Start the monitor:
 npm start
 ```
 
+If your VPN app exposes a local HTTP/SOCKS proxy on `127.0.0.1:7897`, use:
+
+```bash
+npm run start:proxy
+```
+
+This enables Node's environment-proxy support and sends X API HTTPS requests through the local proxy.
+
 ## Watch Rules
 
 Each `watch` item becomes one X filtered-stream rule.
