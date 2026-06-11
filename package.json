@@ -1,9 +1,9 @@
 {
-  "name": "x-finance-watch",
+  "name": "x-watch",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Monitor selected X accounts via the official filtered stream and email new posts.",
+  "description": "Watch selected X accounts via the official filtered stream and email new posts.",
   "engines": {
     "node": ">=20"
   },

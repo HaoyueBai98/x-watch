@@ -1,8 +1,8 @@
-# X Finance Watch
+# X Watch
 
 Monitor selected X accounts through the official X API v2 filtered stream and email new posts.
 
-The service is designed for low-latency market watching:
+The service is designed for low-latency X account watching across any topic or workflow:
 
 - uses a long-lived filtered stream connection instead of polling
 - syncs `from:username` stream rules from `config.json`
@@ -43,11 +43,11 @@ Edit `config.json`:
 ```json
 {
   "watch": [
-    { "username": "elerianm", "label": "Mohamed El-Erian" },
+    { "username": "xdevelopers", "label": "X Developers" },
     {
-      "username": "federalreserve",
-      "label": "Federal Reserve",
-      "keywordsNone": ["speech livestream"]
+      "username": "OpenAI",
+      "label": "OpenAI",
+      "keywordsAny": ["api", "model", "release"]
     }
   ],
   "email": {
@@ -111,7 +111,7 @@ Supported per-account options:
 - `keywordsAll`: requires every listed word or phrase
 - `keywordsNone`: excludes words or phrases
 
-Example:
+Market and finance example:
 
 ```json
 {
@@ -129,6 +129,8 @@ Generated rule:
 ```text
 from:elerianm -is:reply -is:retweet (fed OR inflation OR "market stress") rates -podcast
 ```
+
+The same structure works for other use cases, such as product releases, policy monitoring, public company accounts, creator updates, incident alerts, or any curated X watchlist.
 
 ## Email Providers
 

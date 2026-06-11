@@ -18,21 +18,21 @@ test("adds keyword include and exclude filters", () => {
   assert.equal(
     buildRuleValue(
       {
-        username: "elerianm",
-        keywordsAny: ["fed", "market stress"],
-        keywordsAll: ["rates"],
+        username: "xdevelopers",
+        keywordsAny: ["api", "major update"],
+        keywordsAll: ["release"],
         keywordsNone: ["podcast"],
       },
       { excludeReplies: false, excludeRetweets: true },
     ),
-    'from:elerianm -is:retweet (fed OR "market stress") rates -podcast',
+    'from:xdevelopers -is:retweet (api OR "major update") release -podcast',
   );
 });
 
 test("deduplicates identical generated rules", () => {
   const rules = buildRules({
-    x: { ruleTagPrefix: "finance", excludeReplies: true, excludeRetweets: true },
-    watch: [{ username: "elerianm" }, { username: "@elerianm" }],
+    x: { ruleTagPrefix: "watch", excludeReplies: true, excludeRetweets: true },
+    watch: [{ username: "xdevelopers" }, { username: "@xdevelopers" }],
   });
   assert.equal(rules.length, 1);
 });

@@ -145,7 +145,7 @@ export class XClient {
         headers: {
           Authorization: `Bearer ${this.bearerToken}`,
           "Content-Type": "application/json",
-          "User-Agent": "x-finance-watch/0.1",
+          "User-Agent": "x-watch/0.1",
         },
         body: options.body ? JSON.stringify(options.body) : undefined,
       });

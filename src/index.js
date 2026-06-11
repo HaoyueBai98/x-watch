@@ -26,12 +26,12 @@ async function main() {
     await emailer.sendPost({
       tweet: {
         id: "0000000000000000000",
-        text: "This is a test email from X Finance Watch. If you received it, email delivery is configured correctly.",
+        text: "This is a test email from X Watch. If you received it, email delivery is configured correctly.",
         created_at: new Date().toISOString(),
       },
       author: {
-        name: "X Finance Watch",
-        username: "x_finance_watch",
+        name: "X Watch",
+        username: "x_watch",
       },
       matchingRules: [{ tag: "test-email" }],
     });
@@ -119,7 +119,7 @@ async function runStreamLoop({ client, emailer, state, rules, config }) {
     reconnectDelayMs = 1000;
   }
 
-  console.log("Stopped X finance watch.");
+  console.log("Stopped X watch.");
 }
 
 async function handleTweet({ payload, emailer, state }) {

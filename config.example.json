@@ -3,7 +3,7 @@
   "x": {
     "apiBase": "https://api.x.com/2",
     "bearerTokenEnv": "X_BEARER_TOKEN",
-    "ruleTagPrefix": "finance-watch",
+    "ruleTagPrefix": "x-watch",
     "syncRules": true,
     "catchupOnStartup": true,
     "catchupOnReconnect": true,
@@ -14,13 +14,13 @@
   },
   "watch": [
     {
-      "username": "elerianm",
-      "label": "Mohamed El-Erian"
+      "username": "xdevelopers",
+      "label": "X Developers"
     },
     {
-      "username": "elerianm",
-      "label": "Example with keywords",
-      "keywordsAny": ["fed", "inflation", "market"],
+      "username": "OpenAI",
+      "label": "OpenAI",
+      "keywordsAny": ["api", "model", "release"],
       "keywordsNone": ["podcast"]
     }
   ],
