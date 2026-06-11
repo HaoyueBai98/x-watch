@@ -78,6 +78,20 @@ npm run start:proxy
 
 This enables Node's environment-proxy support and sends X API HTTPS requests through the local proxy.
 
+Send a one-off test email:
+
+```bash
+npm run send:test-email
+```
+
+With the same local proxy:
+
+```bash
+npm run send:test-email:proxy
+```
+
+When the stream is connected, the process prints `Connected to X filtered stream. Waiting for matching posts...` and then occasional keep-alive messages. New emails are sent only when a watched account posts something matching your rules.
+
 ## Watch Rules
 
 Each `watch` item becomes one X filtered-stream rule.

@@ -21,6 +21,24 @@ async function main() {
     return;
   }
 
+  if (args.has("--send-test-email")) {
+    const emailer = new Emailer(config.email);
+    await emailer.sendPost({
+      tweet: {
+        id: "0000000000000000000",
+        text: "This is a test email from X Finance Watch. If you received it, email delivery is configured correctly.",
+        created_at: new Date().toISOString(),
+      },
+      author: {
+        name: "X Finance Watch",
+        username: "x_finance_watch",
+      },
+      matchingRules: [{ tag: "test-email" }],
+    });
+    console.log("Test email sent.");
+    return;
+  }
+
   const state = new StateStore(config.stateFile);
   await state.load();
 
@@ -48,6 +66,7 @@ async function runStreamLoop({ client, emailer, state, rules, config }) {
   let stopped = false;
   let reconnectDelayMs = 1000;
   let controller = new AbortController();
+  let lastKeepAliveLogAt = 0;
 
   const stop = () => {
     stopped = true;
@@ -62,7 +81,17 @@ async function runStreamLoop({ client, emailer, state, rules, config }) {
       console.log("Connecting to X filtered stream...");
       await client.stream({
         signal: controller.signal,
-        onKeepAlive: () => {},
+        onConnected: () => {
+          reconnectDelayMs = 1000;
+          console.log("Connected to X filtered stream. Waiting for matching posts...");
+        },
+        onKeepAlive: () => {
+          const now = Date.now();
+          if (now - lastKeepAliveLogAt > 60000) {
+            lastKeepAliveLogAt = now;
+            console.log(`Stream keep-alive received at ${new Date(now).toISOString()}`);
+          }
+        },
         onTweet: async (payload) => {
           await handleTweet({ payload, emailer, state });
         },

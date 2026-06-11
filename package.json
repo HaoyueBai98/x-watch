@@ -10,6 +10,8 @@
   "scripts": {
     "start": "node src/index.js",
     "start:proxy": "NODE_USE_ENV_PROXY=1 HTTP_PROXY=http://127.0.0.1:7897 HTTPS_PROXY=http://127.0.0.1:7897 node src/index.js",
+    "send:test-email": "node src/index.js --send-test-email",
+    "send:test-email:proxy": "NODE_USE_ENV_PROXY=1 HTTP_PROXY=http://127.0.0.1:7897 HTTPS_PROXY=http://127.0.0.1:7897 node src/index.js --send-test-email",
     "check": "node src/index.js --check",
     "test": "node --test"
   },

@@ -58,7 +58,7 @@ export class XClient {
     return { deleted: deleteIds.length, added: add.length, kept: desiredRules.length - add.length };
   }
 
-  async stream({ signal, onTweet, onKeepAlive }) {
+  async stream({ signal, onConnected, onTweet, onKeepAlive }) {
     const search = new URLSearchParams({
       "tweet.fields": TWEET_FIELDS.join(","),
       "user.fields": USER_FIELDS.join(","),
@@ -70,6 +70,8 @@ export class XClient {
     if (!response.body) {
       throw new Error("X stream response did not include a readable body");
     }
+
+    onConnected?.();
 
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
