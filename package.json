@@ -1,0 +1,18 @@
+{
+  "name": "x-finance-watch",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Monitor selected X accounts via the official filtered stream and email new posts.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "check": "node src/index.js --check",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "nodemailer": "^8.0.11"
+  }
+}

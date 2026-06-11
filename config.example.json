@@ -1,0 +1,41 @@
+{
+  "stateFile": "./data/state.json",
+  "x": {
+    "apiBase": "https://api.x.com/2",
+    "bearerTokenEnv": "X_BEARER_TOKEN",
+    "ruleTagPrefix": "finance-watch",
+    "syncRules": true,
+    "catchupOnStartup": true,
+    "catchupOnReconnect": true,
+    "catchupMaxResults": 25,
+    "excludeReplies": true,
+    "excludeRetweets": true,
+    "excludeQuotes": false
+  },
+  "watch": [
+    {
+      "username": "elerianm",
+      "label": "Mohamed El-Erian"
+    },
+    {
+      "username": "elerianm",
+      "label": "Example with keywords",
+      "keywordsAny": ["fed", "inflation", "market"],
+      "keywordsNone": ["podcast"]
+    }
+  ],
+  "email": {
+    "provider": "resend",
+    "from": "X Watch <alerts@example.com>",
+    "to": ["you@example.com"],
+    "subjectPrefix": "[X Watch]",
+    "resendApiKeyEnv": "RESEND_API_KEY",
+    "smtp": {
+      "hostEnv": "SMTP_HOST",
+      "portEnv": "SMTP_PORT",
+      "secureEnv": "SMTP_SECURE",
+      "userEnv": "SMTP_USER",
+      "passEnv": "SMTP_PASS"
+    }
+  }
+}
